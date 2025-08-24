@@ -1,0 +1,45 @@
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.tfvars
+!terraform.tfvars.example
+tfplan
+.terraform.tfstate.lock.info
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+test_env/
+*.egg-info/
+.pytest_cache/
+
+# AWS
+response.json
+.aws/
+
+# Lambda deployment packages
+backend/dist/*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
