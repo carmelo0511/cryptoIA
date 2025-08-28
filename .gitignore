@@ -43,3 +43,9 @@ logs/
 # Environment variables
 .env
 .env.local
+
+# Large model files (>100MB GitHub limit)
+backend/models/*.pth
+backend/models/*.onnx
+training/*.pth
+training/*.onnx
