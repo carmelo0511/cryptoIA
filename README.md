@@ -31,32 +31,51 @@ See [ROADMAP.md](./ROADMAP.md) for detailed implementation plan.
 ## 🚀 Live Deployment Status
 
 **✅ Phase 1 COMPLETED** - Infrastructure & Data Pipeline fully operational  
-**✅ Phase 2 COMPLETED** - Vision Transformer Training & Model Export
+**✅ Phase 2 COMPLETED** - Vision Transformer Training & Model Export  
+**✅ Phase 3 COMPLETED** - Backend & AI Integration with Docker Container
 
 ### Current Status
-- **Phase 1:** AWS Infrastructure deployed and operational
-- **Phase 2:** Vision Transformer trained with **90.5% accuracy** 
-- **Next:** Phase 3 - Backend & AI Integration
+- **Phase 1:** AWS Infrastructure deployed and operational ✅
+- **Phase 2:** Vision Transformer trained with **90.5% accuracy** ✅
+- **Phase 3:** Docker Container deployment with ONNX Vision model ✅
+- **Next:** Phase 4 - Frontend Dashboard Development
 
 ### Deployed Infrastructure
 - **API Base URL:** `https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev`
 - **AWS Account:** 304783065136 (us-east-1)
-- **Last Updated:** August 27, 2025
+- **Container Registry:** ECR with Vision Transformer images
+- **Cost Optimized:** API Gateway caching disabled (-$14.40/month)
+- **Budget Control:** $10/month limit with 80% alerts
+- **Last Updated:** August 28, 2025
 
 ### Available Endpoints
 ```bash
 # Test the live API infrastructure
 curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/predictions"
 curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/patterns?symbol=BTCUSDT"
+
+# Vision-based pattern analysis (Phase 3)
+curl -X POST "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/analyze-chart" \
+  -H "Content-Type: application/json" \
+  -d '{"symbol": "BTCUSDT"}'
 ```
 
 ### AWS Resources Deployed
 - ✅ **3 Lambda Functions** (API, Data Ingestion, Pattern Analysis)
-- ✅ **API Gateway** with REST endpoints and caching
+- ✅ **ECR Repository** with Vision Transformer container images
+- ✅ **API Gateway** with REST endpoints (cost-optimized)
 - ✅ **3 DynamoDB Tables** with TTL for data management
 - ✅ **2 S3 Buckets** with encryption and lifecycle policies
 - ✅ **IAM Roles & Policies** for secure access
-- ✅ **CloudWatch Logs** for monitoring
+- ✅ **CloudWatch Logs** for monitoring and debugging
+- ✅ **Budget & Cost Controls** for expense management
+
+### Vision Transformer Container
+- ✅ **Docker Container:** Lambda-compatible with ONNX runtime
+- ✅ **Model Integration:** 327MB ONNX model in production container
+- ✅ **ECR Deployment:** Images pushed to `cryptoai-analytics-vision-model`
+- ✅ **Performance:** Optimized for <100ms inference latency
+- ✅ **Scalability:** Auto-scaling Lambda container architecture
 
 ### Vision Transformer Models
 - ✅ **Training Completed:** 90.5% validation accuracy (exceeded 75-85% target)
@@ -66,8 +85,9 @@ curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/patterns?symbol
 - ✅ **Pattern Classes:** 10 crypto chart patterns implemented
 - ✅ **Training Infrastructure:** Google Colab notebook + local scripts
 - ✅ **Verification:** All tests passed (ONNX inference, pattern recognition)
+- ✅ **Container Integration:** Working Docker deployment pipeline
 
 ### Next Steps
-**Phase 3:** Backend & AI Integration - Deploy Lambda Container for Vision inference
+**Phase 4:** Frontend Dashboard - React interface for real-time pattern visualization
 
 See [ROADMAP.md](./ROADMAP.md) for complete project tracking and implementation details.

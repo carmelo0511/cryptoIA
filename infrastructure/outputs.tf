@@ -48,3 +48,14 @@ output "api_handler_function_name" {
   description = "API handler Lambda function name"
   value       = aws_lambda_function.api_handler.function_name
 }
+
+# ECR repository for Vision Transformer model
+output "vision_model_ecr_repository_url" {
+  description = "ECR repository URL for Vision Transformer model"
+  value       = aws_ecr_repository.vision_model.repository_url
+}
+
+output "vision_model_ecr_repository_name" {
+  description = "ECR repository name for Vision Transformer model"
+  value       = aws_ecr_repository.vision_model.name
+}

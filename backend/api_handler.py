@@ -208,6 +208,30 @@ def lambda_handler(event, context):
                 }, default=str)
             }
         
+        elif path == '/analyze-chart' and http_method == 'POST':
+            try:
+                request_body = json.loads(body) if body else {}
+                symbol = request_body.get('symbol', 'BTCUSDT')
+                
+                # Trigger vision-based pattern analysis
+                result = handler.create_prediction_request(symbol)
+                
+                return {
+                    'statusCode': 200,
+                    'headers': cors_headers(),
+                    'body': json.dumps({
+                        'message': f'Vision analysis started for {symbol}',
+                        'result': result
+                    })
+                }
+                
+            except json.JSONDecodeError:
+                return {
+                    'statusCode': 400,
+                    'headers': cors_headers(),
+                    'body': json.dumps({'error': 'Invalid JSON in request body'})
+                }
+        
         else:
             return {
                 'statusCode': 404,

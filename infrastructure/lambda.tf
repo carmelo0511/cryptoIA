@@ -21,13 +21,12 @@ resource "aws_lambda_function" "data_ingestion" {
   tags       = local.common_tags
 }
 
-# Lambda function for pattern analysis (Vision Transformer)
+# Lambda function for pattern analysis (Vision Transformer Container)
 resource "aws_lambda_function" "pattern_analysis" {
-  filename      = "../backend/dist/pattern-analysis.zip"
+  package_type  = "Image"
+  image_uri     = "${aws_ecr_repository.vision_model.repository_url}:latest"
   function_name = "${var.project_name}-pattern-analysis-${var.environment}"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.lambda_handler"
-  runtime       = "python3.11"
   timeout       = 300
   memory_size   = 3008 # Max memory for ML inference
 
@@ -36,12 +35,16 @@ resource "aws_lambda_function" "pattern_analysis" {
       PATTERN_CACHE_TABLE = aws_dynamodb_table.pattern_cache.name
       PREDICTIONS_TABLE   = aws_dynamodb_table.predictions.name
       CHARTS_BUCKET       = aws_s3_bucket.charts.bucket
+      MARKET_DATA_TABLE   = aws_dynamodb_table.market_data.name
       ENVIRONMENT         = var.environment
     }
   }
 
-  depends_on = [aws_cloudwatch_log_group.pattern_analysis]
-  tags       = local.common_tags
+  depends_on = [
+    aws_cloudwatch_log_group.pattern_analysis,
+    aws_ecr_repository.vision_model
+  ]
+  tags = local.common_tags
 }
 
 # Lambda function for API endpoints
