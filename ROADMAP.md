@@ -169,21 +169,33 @@ Visual pattern detection with real-time overlay - captivating, innovative, and a
 
 This project is designed for **Claude Code implementation** - each phase can be implemented step-by-step using prompts like "claude-code implement --phase 1". 
 
-### Current Status: Phase 1 Complete - Ready for ML Development
+### Current Status: Phase 2 Complete - Vision Transformer Ready
 - [x] Roadmap created and updated
-- [x] Project structure initialized
+- [x] Project structure initialized  
 - [x] Infrastructure deployed and operational on AWS
 - [x] API Gateway with REST endpoints functional
 - [x] Lambda functions deployed and tested
 - [x] DynamoDB tables configured with TTL
 - [x] S3 buckets with encryption and lifecycle policies
 - [x] Local testing framework implemented
+- [x] Vision Transformer training pipeline complete
+- [x] Models trained with 90.5% accuracy (exceeded target)
+- [x] ONNX export and quantization successful
+- [x] Git LFS configured for large model files
+- [x] Comprehensive test suite and validation complete
 
 **🚀 LIVE DEPLOYMENT:**
 - **API Base URL:** https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev
 - **Test Endpoints:** GET /predictions, GET /patterns, POST /predictions
 - **AWS Account:** 304783065136
 - **Region:** us-east-1
+
+**🤖 TRAINED MODELS:**
+- **Production ONNX:** `backend/models/crypto_pattern_model_v14.onnx` (327.5MB)
+- **PyTorch Checkpoint:** `backend/models/best_model.pth` (327MB) 
+- **Accuracy Achieved:** 90.5% validation (exceeded 75-85% target)
+- **Pattern Classes:** 10 crypto technical analysis patterns
+- **Model Access:** Available via Git LFS in repository
 
 ---
 

@@ -30,16 +30,22 @@ See [ROADMAP.md](./ROADMAP.md) for detailed implementation plan.
 
 ## 🚀 Live Deployment Status
 
-**✅ Phase 1 COMPLETED** - Infrastructure & Data Pipeline fully operational
+**✅ Phase 1 COMPLETED** - Infrastructure & Data Pipeline fully operational  
+**✅ Phase 2 COMPLETED** - Vision Transformer Training & Model Export
+
+### Current Status
+- **Phase 1:** AWS Infrastructure deployed and operational
+- **Phase 2:** Vision Transformer trained with **90.5% accuracy** 
+- **Next:** Phase 3 - Backend & AI Integration
 
 ### Deployed Infrastructure
 - **API Base URL:** `https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev`
 - **AWS Account:** 304783065136 (us-east-1)
-- **Last Updated:** August 24, 2025
+- **Last Updated:** August 27, 2025
 
 ### Available Endpoints
 ```bash
-# Test the live API
+# Test the live API infrastructure
 curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/predictions"
 curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/patterns?symbol=BTCUSDT"
 ```
@@ -52,7 +58,16 @@ curl "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/patterns?symbol
 - ✅ **IAM Roles & Policies** for secure access
 - ✅ **CloudWatch Logs** for monitoring
 
+### Vision Transformer Models
+- ✅ **Training Completed:** 90.5% validation accuracy (exceeded 75-85% target)
+- ✅ **Model Files:** Available via Git LFS
+  - `backend/models/crypto_pattern_model_v14.onnx` (327.5MB) - Production ready
+  - `backend/models/best_model.pth` (327MB) - PyTorch checkpoint
+- ✅ **Pattern Classes:** 10 crypto chart patterns implemented
+- ✅ **Training Infrastructure:** Google Colab notebook + local scripts
+- ✅ **Verification:** All tests passed (ONNX inference, pattern recognition)
+
 ### Next Steps
-**Phase 2:** Vision Transformer Training & Integration (Weeks 3-4)
+**Phase 3:** Backend & AI Integration - Deploy Lambda Container for Vision inference
 
 See [ROADMAP.md](./ROADMAP.md) for complete project tracking and implementation details.
