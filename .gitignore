@@ -44,8 +44,8 @@ logs/
 .env
 .env.local
 
-# Large model files (>100MB GitHub limit)
-backend/models/*.pth
-backend/models/*.onnx
-training/*.pth
-training/*.onnx
+# Large model files now handled by Git LFS
+# backend/models/*.pth
+# backend/models/*.onnx
+# training/*.pth
+# training/*.onnx
