@@ -135,17 +135,39 @@
 
 ---
 
-### Phase 4: Weeks 7-8 - Frontend & Optimization
-**Status:** ⏳ Not Started
+### Phase 3.5: Data Integration (PRIORITY)
+**Status:** ⚠️ IDENTIFIED - Requires Implementation
+
+#### Critical Missing Component:
+- [ ] **Activate Binance API Integration** - WebSocket currently coded but not running
+- [ ] Implement real-time crypto data ingestion (currently only test data)
+- [ ] Choose integration method:
+  - **Option A:** CloudWatch Events + REST API (economical, periodic)
+  - **Option B:** ECS Fargate WebSocket (real-time, 24/7 connection)  
+  - **Option C:** Manual trigger (demo/testing only)
+
+**Current Status:** 
+- ✅ Code written for Binance WebSocket in `data_ingestion.py`
+- ✅ DynamoDB structure ready for market data
+- ❌ **No live crypto data flowing** (only test data: symbol=TEST, price=50000)
+
+**Impact:** Vision AI needs real market data for meaningful pattern analysis
+
+---
+
+### Phase 4: Weeks 7-8 - Frontend & Optimization  
+**Status:** ⏳ Ready After Phase 3.5
 
 #### Week 7-8 Tasks:
+- [ ] **Complete Binance integration first (Phase 3.5)**
 - [ ] Build React Dashboard with chart visualization
 - [ ] Implement Canvas API for pattern overlay in real-time
 - [ ] Add cost monitoring and auto-retraining on drift detection
 - [ ] Create complete demo video and portfolio documentation
 
 **Deliverables:**
-- ✅ Complete app
+- ✅ Live crypto data pipeline
+- ✅ Complete app with real-time data
 - ✅ Demo video
 - ✅ Portfolio documentation
 

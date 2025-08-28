@@ -87,7 +87,13 @@ curl -X POST "https://pbqj4cxv71.execute-api.us-east-1.amazonaws.com/dev/analyze
 - ✅ **Verification:** All tests passed (ONNX inference, pattern recognition)
 - ✅ **Container Integration:** Working Docker deployment pipeline
 
-### Next Steps
-**Phase 4:** Frontend Dashboard - React interface for real-time pattern visualization
+### ⚠️ Critical Next Step: Phase 3.5
+**PRIORITY:** Activate Binance API Integration
+- **Issue:** WebSocket coded but not running (only test data in DynamoDB)
+- **Impact:** Vision AI needs real market data for meaningful analysis
+- **Options:** CloudWatch+REST API (economical) or ECS+WebSocket (real-time)
+
+### Next Steps After Data Integration
+**Phase 4:** Frontend Dashboard - React interface with live crypto data visualization
 
 See [ROADMAP.md](./ROADMAP.md) for complete project tracking and implementation details.
