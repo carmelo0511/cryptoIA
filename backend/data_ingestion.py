@@ -97,6 +97,7 @@ class CryptoDataIngestion:
 def lambda_handler(event, context):
     """Lambda handler for data ingestion"""
     try:
+        logger.info("Starting data ingestion Lambda")
         ingestion = CryptoDataIngestion()
         
         # For Lambda, we'll process batch data rather than maintain WebSocket
@@ -106,31 +107,48 @@ def lambda_handler(event, context):
         import requests
         
         results = []
-        for symbol in SYMBOLS:
-            url = f"https://api.binance.com/api/v3/klines?symbol={symbol}&interval=1m&limit=5"
-            response = requests.get(url)
+        # Switch to CoinGecko API due to Binance geo-blocking Lambda IPs
+        coingecko_symbols = {
+            'BTCUSDT': 'bitcoin',
+            'ETHUSDT': 'ethereum', 
+            'ADAUSDT': 'cardano',
+            'SOLUSDT': 'solana',
+            'DOTUSDT': 'polkadot'
+        }
+        
+        logger.info(f"Processing symbols via CoinGecko: {list(coingecko_symbols.keys())}")
+        
+        # Get current prices for all coins in one request
+        coin_ids = ','.join(coingecko_symbols.values())
+        url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_ids}&vs_currencies=usd"
+        logger.info(f"Fetching data from CoinGecko: {url}")
+        
+        response = requests.get(url)
+        if response.status_code == 200:
+            prices = response.json()
+            logger.info(f"Got prices for {len(prices)} coins")
+            current_timestamp = int(datetime.now().timestamp())
             
-            if response.status_code == 200:
-                klines = response.json()
-                for kline in klines:
-                    timestamp = int(kline[0]) // 1000
+            for binance_symbol, coingecko_id in coingecko_symbols.items():
+                if coingecko_id in prices and 'usd' in prices[coingecko_id]:
+                    price = prices[coingecko_id]['usd']
                     
                     from decimal import Decimal
+                    # Store simplified market data (CoinGecko doesn't provide OHLCV in simple/price)
                     item = {
-                        'symbol': symbol,
-                        'timestamp': timestamp,
-                        'open': Decimal(str(kline[1])),
-                        'high': Decimal(str(kline[2])),
-                        'low': Decimal(str(kline[3])),
-                        'close': Decimal(str(kline[4])),
-                        'volume': Decimal(str(kline[5])),
-                        'trades': int(kline[8]),
+                        'symbol': binance_symbol,
+                        'timestamp': current_timestamp,
+                        'price': Decimal(str(price)),
                         'ttl': int((datetime.now() + timedelta(days=7)).timestamp())
                     }
                     
                     ingestion.market_data_table.put_item(Item=item)
-                    results.append(f"Stored {symbol} data for timestamp {timestamp}")
+                    results.append(f"Stored {binance_symbol} price {price} for timestamp {current_timestamp}")
+                    logger.info(f"Stored {binance_symbol} price {price} for timestamp {current_timestamp}")
+        else:
+            logger.error(f"Failed to fetch data from CoinGecko: {response.status_code}")
         
+        logger.info(f"Completed data ingestion with {len(results)} items stored")
         return {
             'statusCode': 200,
             'body': json.dumps({

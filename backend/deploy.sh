@@ -26,7 +26,7 @@ create_package() {
     
     # Create zip package
     cd $temp_dir
-    zip -r "/Users/bryannakache/portfolio/cryptoIA/backend/dist/$function_name.zip" .
+    zip -r "/Users/bryannakache/portfolio/cryptoIA-1/backend/dist/$function_name.zip" .
     cd - > /dev/null
     
     # Cleanup
@@ -35,8 +35,8 @@ create_package() {
     echo "Package created: dist/$function_name.zip"
 }
 
-# Create packages for each Lambda function (simplified for testing)
-create_package "data-ingestion" "data_ingestion_simple.py"
+# Create packages for each Lambda function
+create_package "data-ingestion" "data_ingestion.py"
 create_package "pattern-analysis" "api_handler_simple.py"  # Reuse simple handler for now
 create_package "api-handler" "api_handler_simple.py"
 
